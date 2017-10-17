@@ -6,6 +6,7 @@ public class Car {
     private Double weight;
     private Integer maxSpeed;
     private Integer issueYear;
+    private String[] fieldsNames = {"id", "name", "weight", "maxSpeed", "issueYear"};
 
     public Car(Integer id, String name, Double weight, Integer maxSpeed, Integer issueYear) {
         this.id = id;
@@ -55,11 +56,7 @@ public class Car {
     }
 
     public String[] getFieldsNames() {
-        String[] result = new String[5];
-        for (String item : result) {
-
-        }
-        return result;
+        return fieldsNames;
     }
 
     public Double getWeight() {

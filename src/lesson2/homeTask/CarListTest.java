@@ -25,25 +25,74 @@ public class CarListTest implements Testable {
     public void test() {
         addValuesToList(array);
         printListEntries(list);
-        //findSymbol();
+
+        sortByIssueYear();
+        printListEntries(list);
         sortBySpeed();
         printListEntries(list);
-        //deleteByMaxFieldValue(array[1].getIssueYear());
-        deleteByMaxIssueYearValue();
+        deleteByFilter(1, 2000);
         printListEntries(list);
-        deleteByMinIssueYearValue();
-        printListEntries(list);
-        getThirdItem();
-        printListEntries(list);
-        refactorName();
-        printListEntries(list);
-        getTwoItems();
+
+        //deleteByMaxIssueYearValue();
+        //printListEntries(list);
+        //deleteByMinIssueYearValue();
+        //printListEntries(list);
+        //getThirdItem();
+        //printListEntries(list);
+        //refactorName();
+        //printListEntries(list);
+        //getTwoItems();
+        //printListEntries(list);
+    }
+
+    @Override
+    public void deleteByFilter(int filterNumber, Object filter) {
+        for (int i = 0; i < list.size(); i++) {
+            switch (filterNumber) {
+                case 1:
+                    if (ExpressionHelper.isBigger(list.get(i).getIssueYear(), filter)) {
+                        list.remove(i);
+                        i--;
+                    }
+                    break;
+                case 2:
+                    if (ExpressionHelper.isLower(list.get(i).getIssueYear(), filter)) {
+                        list.remove(i);
+                        i--;
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void sortByName() {
+        list.sort((o1, o2) ->
+                Collator.getInstance().compare(o1.getName(), o2.getName()));
+    }
+
+    @Override
+    public void sortByIssueYear() {
+        list.sort((o1, o2) ->
+                Collator.getInstance().compare(o1.getIssueYear().toString(), o2.getIssueYear().toString()));
+    }
+
+    @Override
+    public void sortByWeight() {
+        list.sort((o1, o2) ->
+                Collator.getInstance().compare(o1.getWeight().toString(), o2.getWeight().toString()));
     }
 
     @Override
     public void sortBySpeed() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getMaxSpeed().toString(), o2.getMaxSpeed().toString()));
+    }
+
+    @Override
+    public void sortById() {
+        list.sort((o1, o2) ->
+                Collator.getInstance().compare(o1.getId().toString(), o2.getId().toString()));
     }
 
     @Override
@@ -67,10 +116,9 @@ public class CarListTest implements Testable {
     }
 
     @Override
-    public Object getThirdItem() {
-        Car result = list.get(2);
+    public void getThirdItem() {
+        System.out.println(list.get(2));
         list.remove(2);
-        return result;
     }
 
     private void addValuesToList(Car[] array) {

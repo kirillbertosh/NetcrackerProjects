@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/*public class CarMapTest implements Testable {
+public class CarMapTest implements Testable {
 
-    private Car[] array = {
-            new Car(1, "Opel", 1500.5, 160, 2004),
+    private Car[] array = {new Car(1, "Opel", 1500.5, 160, 2004),
             new Car(2, "BMW", 2134.5, 190, 2008),
             new Car(3, "Mercedes", 1935.7, 206, 2013),
             new Car(4, "Toyota", 1580.4, 180, 2013),
-            new Car(5, "Toyota", 1488.0, 175, 1998)};
+            new Car(5, "Toyota", 1488.0, 175, 1998),
+            new Car(6, "Ferrari", 1386.5, 280, 2003),
+            new Car(7, "Lada", 1678.9, 175, 1986)};
 
     private Map<String, Car> map = new HashMap();
 
@@ -22,23 +23,64 @@ import java.util.Objects;
         deleteByMaxIssueYearValue();
         System.out.println("");
         printListEntries(map);
-        //System.out.println(getThirdItem().toString());
+
     }
 
     @Override
-    public Object getThirdItem() {
-        for (int i = map.size(); i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (map.get()) {
-
-                }
+    public void deleteByFilter(int filterNumber, Object filter) {
+        /*for (int i = 0; i < map.size(); i++) {
+            switch (filterNumber) {
+                case 1:
+                    if (ExpressionHelper.isBigger(map.))
+                    break;
+                case 2:
+                    break;
             }
-        }
-        return null;
+        }*/
+    }
+
+    @Override
+    public void getThirdItem() {
+
     }
 
     @Override
     public void sortBySpeed() {
+
+    }
+
+    @Override
+    public void sortByName() {
+
+    }
+
+    @Override
+    public void sortById() {
+
+    }
+
+    @Override
+    public void sortByIssueYear() {
+
+    }
+
+    @Override
+    public void sortByWeight() {
+
+    }
+
+    @Override
+    public void refactorName() {
+
+    }
+
+    @Override
+    public void findSymbol() {
+
+    }
+
+    @Override
+    public void getTwoItems() {
 
     }
 
@@ -69,7 +111,42 @@ import java.util.Objects;
     }
 
     @Override
-    public void getTwoItems() {
+    public void deleteByMaxWeightValue() {
+
+    }
+
+    @Override
+    public void deleteByMinWeightValue() {
+
+    }
+
+    @Override
+    public void deleteByMaxNameValue() {
+
+    }
+
+    @Override
+    public void deleteByMinNameValue() {
+
+    }
+
+    @Override
+    public void deleteByMaxMaxSpeedValue() {
+
+    }
+
+    @Override
+    public void deleteByMinMaxSpeedValue() {
+
+    }
+
+    @Override
+    public void deleteByMaxIdValue() {
+
+    }
+
+    @Override
+    public void deleteByMinIdValue() {
 
     }
 
@@ -86,4 +163,4 @@ import java.util.Objects;
         System.out.println("Array length = " + array.length);
         System.out.println("Map size = " + map.size());
     }
-}*/
+}
