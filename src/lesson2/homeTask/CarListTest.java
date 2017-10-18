@@ -45,7 +45,6 @@ public class CarListTest implements Testable {
         //printListEntries(list);
     }
 
-    @Override
     public void deleteByFilter(int filterNumber, Object filter) {
         for (int i = 0; i < list.size(); i++) {
             switch (filterNumber) {
@@ -65,31 +64,26 @@ public class CarListTest implements Testable {
         }
     }
 
-    @Override
     public void sortByName() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getName(), o2.getName()));
     }
 
-    @Override
     public void sortByIssueYear() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getIssueYear().toString(), o2.getIssueYear().toString()));
     }
 
-    @Override
     public void sortByWeight() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getWeight().toString(), o2.getWeight().toString()));
     }
 
-    @Override
     public void sortBySpeed() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getMaxSpeed().toString(), o2.getMaxSpeed().toString()));
     }
 
-    @Override
     public void sortById() {
         list.sort((o1, o2) ->
                 Collator.getInstance().compare(o1.getId().toString(), o2.getId().toString()));
@@ -115,7 +109,6 @@ public class CarListTest implements Testable {
         }
     }
 
-    @Override
     public void getThirdItem() {
         System.out.println(list.get(2));
         list.remove(2);
