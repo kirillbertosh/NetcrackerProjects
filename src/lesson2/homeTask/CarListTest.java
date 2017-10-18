@@ -33,8 +33,8 @@ public class CarListTest implements Testable {
         deleteByFilter(1, 2000);
         printListEntries(list);
 
-        //deleteByMaxIssueYearValue();
-        //printListEntries(list);
+        deleteByMaxIssueYearValue();
+        printListEntries(list);
         //deleteByMinIssueYearValue();
         //printListEntries(list);
         //getThirdItem();
