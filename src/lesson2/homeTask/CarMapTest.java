@@ -1,8 +1,10 @@
 package lesson2.homeTask;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.Collator;
+import java.util.*;
 
 public class CarMapTest implements Testable {
 
@@ -20,134 +22,192 @@ public class CarMapTest implements Testable {
     public void test() {
         addValuesToList(array);
         printListEntries(map);
-        deleteByMaxIssueYearValue();
+        deleteByMaxWeightValue();
         System.out.println("");
         printListEntries(map);
-
+        getThirdItem();
+        //sortByKey();
+        //findSymbol();
     }
 
-    @Override
-    public void deleteByFilter(int filterNumber, Object filter) {
-        /*for (int i = 0; i < map.size(); i++) {
-            switch (filterNumber) {
-                case 1:
-                    if (ExpressionHelper.isBigger(map.))
-                    break;
-                case 2:
-                    break;
-            }
-        }*/
-    }
-
-    @Override
-    public void getThirdItem() {
-
-    }
-
-    @Override
-    public void sortBySpeed() {
-
-    }
-
-    @Override
-    public void sortByName() {
-
-    }
-
-    @Override
-    public void sortById() {
-
-    }
-
-    @Override
-    public void sortByIssueYear() {
-
-    }
-
-    @Override
-    public void sortByWeight() {
-
-    }
-
-    @Override
-    public void refactorName() {
-
-    }
-
-    @Override
-    public void findSymbol() {
-
+    private List sortByKey() {
+        List<Car> list = new LinkedList<>();
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            list.add(entry.getValue());
+        }
+        list.sort((o1, o2) ->
+                Collator.getInstance().compare(o1.getName(), o2.getName()));
+        return list;
     }
 
     @Override
     public void getTwoItems() {
+        List<Car> list = sortByKey();
+        System.out.println(list.get(1).toString());
+        System.out.println(list.get(2).toString());
+    }
 
+    public void getThirdItem() {
+        List<Car> list = sortByKey();
+        map.entrySet().removeIf(o -> o.getValue().getName() == list.get(2).getName());
+        printListEntries(map);
+    }
+
+    @Override
+    public void refactorName() {
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            entry.getValue().setName("_1" + entry.getValue().getName());
+        }
+    }
+
+    @Override
+    public void findSymbol() {
+        String symbol = "";
+        System.out.println("Enter symbol to find");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            symbol = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getName().contains(symbol) ||
+                    Integer.toString(entry.getValue().getMaxSpeed()).contains(symbol) ||
+                    Integer.toString(entry.getValue().getIssueYear()).contains(symbol) ||
+                    Integer.toString(entry.getValue().getId()).contains(symbol) ||
+                    Double.toString(entry.getValue().getWeight()).contains(symbol)) {
+                System.out.println(entry.getValue().toString());
+            }
+        }
     }
 
     @Override
     public void deleteByMaxIssueYearValue() {
         Car temp = array[0];
-        String[] keyArray = new String[array.length];
         int i = 0;
         for (Map.Entry<String, Car> entry : map.entrySet()) {
-            if (entry.getValue().getIssueYear() >= temp.getIssueYear()) {
-                temp = entry.getValue();
+            if (entry.getValue().getIssueYear().intValue() >= temp.getIssueYear().intValue()) {
+                i = entry.getValue().getIssueYear().intValue();
             }
         }
-        for (Map.Entry<String, Car> entry : map.entrySet()) {
-            if (Objects.equals(entry.getValue().getIssueYear(), temp.getIssueYear())) {
-                keyArray[i] = entry.getValue().getName();
-                i++;
-            }
-        }
-        for (int j = 0; j < i; j++) {
-            map.remove(keyArray[i]);
-        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getIssueYear().intValue() == finalI);
     }
 
     @Override
     public void deleteByMinIssueYearValue() {
-
+        Car temp = array[0];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getIssueYear().intValue() <= temp.getIssueYear().intValue()) {
+                i = entry.getValue().getIssueYear().intValue();
+            }
+        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getIssueYear().intValue() == finalI);
     }
 
     @Override
     public void deleteByMaxWeightValue() {
-
+        Car temp = array[0];
+        double i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getWeight().doubleValue() >= temp.getWeight().doubleValue()) {
+                i = entry.getValue().getWeight().doubleValue();
+            }
+        }
+        double finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getWeight().doubleValue() == finalI);
     }
 
     @Override
     public void deleteByMinWeightValue() {
-
+        Car temp = array[0];
+        double i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getWeight().doubleValue() <= temp.getWeight().doubleValue()) {
+                i = entry.getValue().getWeight().doubleValue();
+            }
+        }
+        double finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getWeight().doubleValue() == finalI);
     }
 
     @Override
     public void deleteByMaxNameValue() {
-
+        Car temp = array[0];
+        String name = "";
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getName().compareTo(temp.getName()) >= 0 ) {
+                name = entry.getValue().getName();
+            }
+        }
+        String finalName = name;
+        map.entrySet().removeIf(o -> o.getValue().getName().compareTo(finalName) == 0);
     }
 
     @Override
     public void deleteByMinNameValue() {
-
+        Car temp = array[0];
+        String name = "";
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getName().compareTo(temp.getName()) <= 0 ) {
+                name = entry.getValue().getName();
+            }
+        }
+        String finalName = name;
+        map.entrySet().removeIf(o -> o.getValue().getName().compareTo(finalName) == 0);
     }
 
     @Override
     public void deleteByMaxMaxSpeedValue() {
-
+        Car temp = array[0];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getMaxSpeed().intValue() >= temp.getMaxSpeed().intValue()) {
+                i = entry.getValue().getMaxSpeed().intValue();
+            }
+        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getMaxSpeed().intValue() == finalI);
     }
 
     @Override
     public void deleteByMinMaxSpeedValue() {
-
+        Car temp = array[0];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getMaxSpeed().intValue() <= temp.getMaxSpeed().intValue()) {
+                i = entry.getValue().getMaxSpeed().intValue();
+            }
+        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getMaxSpeed().intValue() == finalI);
     }
 
     @Override
     public void deleteByMaxIdValue() {
-
+        Car temp = array[0];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getId().intValue() >= temp.getId().intValue()) {
+                i = entry.getValue().getId().intValue();
+            }
+        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getId().intValue() == finalI);
     }
 
     @Override
     public void deleteByMinIdValue() {
-
+        Car temp = array[0];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : map.entrySet()) {
+            if (entry.getValue().getId().intValue() <= temp.getId().intValue()) {
+                i = entry.getValue().getId().intValue();
+            }
+        }
+        int finalI = i;
+        map.entrySet().removeIf(o -> o.getValue().getId().intValue() == finalI);
     }
 
     private void addValuesToList(Car[] array) {
